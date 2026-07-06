@@ -1,22 +1,27 @@
-# Last updated: 06/07/2026, 21:55:35
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        mp = {}
-
-        # Count frequencies
-        for num in nums:
-            if num in mp:
-                mp[num] += 1
-            else:
-                mp[num] = 1
-
-        # Sort by frequency in descending order
-        freq = sorted(mp.items(), key=lambda x: x[1], reverse=True)
-
-        ans = []
-
-        # Take first k elements
-        for i in range(k):
-            ans.append(freq[i][0])
-
-        return ans
+# Last updated: 06/07/2026, 22:47:47
+1class Solution(object):
+2    def topKFrequent(self, nums, k):
+3        freq = defaultdict(int)
+4
+5        # Count frequencies
+6        for num in nums:
+7            freq[num] += 1
+8
+9        # Create buckets
+10        bucket = [[] for _ in range(len(nums) + 1)]
+11
+12        # Place numbers into buckets
+13        for num, count in freq.items():
+14            bucket[count].append(num)
+15
+16        ans = []
+17
+18        # Traverse buckets from highest frequency to lowest
+19        for i in range(len(bucket) - 1, 0, -1):
+20            for num in bucket[i]:
+21                ans.append(num)
+22
+23                if len(ans) == k:
+24                    return ans
+25
+26        
