@@ -1,14 +1,13 @@
-# Last updated: 06/07/2026, 21:55:44
-class Solution(object):
-    def groupAnagrams(self, strs):
-        mp={}
-
-        for word in strs:
-            key="".join(sorted(word))
-            if key not in mp:
-                mp[key]=[]
-            mp[key].append(word)
-        
-        return list(mp.values())
-
-        
+# Last updated: 06/07/2026, 22:19:45
+1class Solution(object):
+2    def groupAnagrams(self, strs):
+3        groups=defaultdict(list)
+4
+5        for word in strs:
+6            key="".join(sorted(word))
+7            groups[key].append(word)
+8    
+9        return list(groups.values())
+10
+11      
+12        
